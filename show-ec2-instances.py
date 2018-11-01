@@ -24,15 +24,24 @@ def main():
     sys.exit()
 
 
+
   # Use low level service class "client"
   # Setup session to ec2 service
   client   = boto3.client('ec2')
+
   
   response = client.describe_instances()
-  
+
+
   #print json.dumps(response, indent=4, sort_keys=True, default=str)   // print full json dump
 
 
+  print
+  print
+
+
+
+  ''' Header '''
   print "{0:<13} {1:<16} {2:<20} {3:<10} {4:<10} {5}".format(
     "VpcId",
     "SubnetId",
@@ -43,12 +52,12 @@ def main():
   )
 
 
+
   for r in response["Reservations"]:
     for i in r["Instances"]:
 
-
       try:
-        # If Tags exist grab Value where Key == Name
+        ''' If Tags exist grab Value where Key == Name '''
         if i['Tags']:
           for t in range(0, len(i['Tags'])):
             if i['Tags'][t]['Key'] == 'Name':
@@ -70,29 +79,6 @@ def main():
 
 
 
-
-
-
-  '''
-  ec2 = boto3.resource('ec2')
-
-  print "{0:<20} {1:<10} {2:<20} {3}".format(
-    "Id", 
-    "State",
-    "Subnet",
-    "Launch Time"
-  )
-
-
-  for i in ec2.instances.all():
-    print "{0:<20} {1:<10} {2:<20} {3}".format(
-      i.id, 
-      i.state['Name'],
-      i.subnet_id,
-      i.launch_time,
-    )
-  
-  '''
 
 
 
