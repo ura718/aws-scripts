@@ -33,9 +33,12 @@ def main():
   #print json.dumps(response, indent=4, sort_keys=True, default=str)   // print full json dump
 
 
-  print "{0:<20} {1:<10} {2}".format(
+  print "{0:<13} {1:<16} {2:<20} {3:<10} {4:<10} {5}".format(
+    "VpcId",
+    "SubnetId",
     "Id",
     "Type",
+    "State",
     "Name"
   )
 
@@ -56,9 +59,12 @@ def main():
 
 
 
-      print "{0:<20} {1:<10} {2}".format(
+      print "{0:<13} {1:<16} {2:<20} {3:<10} {4:<10} {5}".format(
+        i["NetworkInterfaces"][0]["VpcId"],
+        i["SubnetId"],
         i["InstanceId"],
         i["InstanceType"],
+        i["State"]["Name"],
         tag_name
       )
 
