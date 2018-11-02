@@ -33,7 +33,9 @@ def main():
   response = client.describe_instances()
 
 
-  #print json.dumps(response, indent=4, sort_keys=True, default=str)   // print full json dump
+  ''' Print full json dump of all ec2 resources 
+  print json.dumps(response, indent=4, sort_keys=True, default=str)
+  '''
 
 
   print
@@ -42,12 +44,15 @@ def main():
 
 
   ''' Header '''
-  print "{0:<13} {1:<16} {2:<20} {3:<10} {4:<10} {5}".format(
+  print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<10} {6:<20} {7:<20} {8}".format(
     "VpcId",
+    "AZ",
     "SubnetId",
     "Id",
     "Type",
     "State",
+    "PublicIp",
+    "PrivateIp",
     "Name"
   )
 
@@ -66,14 +71,40 @@ def main():
       except KeyError:
         pass
 
+     
+
+ 
+      try:
+        ''' Get Public IP and if it does not exist empty out variable '''
+        if i["NetworkInterfaces"][0]["Association"]["PublicIp"]:
+          publicip = i["NetworkInterfaces"][0]["Association"]["PublicIp"]
+      except KeyError:
+        publicip = '' 
+        pass
 
 
-      print "{0:<13} {1:<16} {2:<20} {3:<10} {4:<10} {5}".format(
+
+
+      try:
+        ''' Get Private IP and if it does not exist empty out variable '''
+        if i["NetworkInterfaces"][0]["PrivateIpAddress"]:
+          privateip = i["NetworkInterfaces"][0]["PrivateIpAddress"]
+      except KeyError:
+        privateip = '' 
+        pass
+      
+
+
+
+      print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<10} {6:<20} {7:<20} {8}".format(
         i["NetworkInterfaces"][0]["VpcId"],
+        i["Placement"]["AvailabilityZone"],
         i["SubnetId"],
         i["InstanceId"],
         i["InstanceType"],
         i["State"]["Name"],
+        publicip,
+        privateip,
         tag_name
       )
 
