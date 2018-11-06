@@ -62,21 +62,69 @@ def main():
   for r in response["Reservations"]:
     for i in r["Instances"]:
 
-      try:
-        ''' If Tags exist grab Value where Key == Name '''
-        if i['Tags']:
-          for t in range(0, len(i['Tags'])):
-            if i['Tags'][t]['Key'] == 'Name':
-              tag_name = i['Tags'][t]['Value']
 
+      ''' VpcId: check if it does exists otherwise empty out variable '''
+      try:
+        if i["NetworkInterfaces"][0]["VpcId"]:
+          VpcId = i["NetworkInterfaces"][0]["VpcId"]
       except KeyError:
+        VpcId = '' 
         pass
 
-     
 
- 
+
+      ''' AvailabilityZone: check if it does exists otherwise empty out variable '''
       try:
-        ''' Get Public IP and if it does not exist empty out variable '''
+        if i["Placement"]["AvailabilityZone"]:
+          AZ = i["Placement"]["AvailabilityZone"]
+      except KeyError:
+        AZ = '' 
+        pass
+
+
+
+      ''' SubnetId: check if it does exists otherwise empty out variable '''
+      try:
+        if i["SubnetId"]:
+          SubnetId = i["SubnetId"]
+      except KeyError:
+        SubnetId = '' 
+        pass
+
+
+
+      ''' InstanceId: check if it does exists otherwise empty out variable '''
+      try:
+        if i["InstanceId"]:
+          InstanceId = i["InstanceId"]
+      except KeyError:
+        InstanceId = '' 
+        pass
+
+
+
+      ''' Type: check if it does exists otherwise empty out variable '''
+      try:
+        if i["InstanceType"]:
+          InstanceType = i["InstanceType"]
+      except KeyError:
+        InstanceType = '' 
+        pass
+
+
+     
+      ''' State: check if it does exists otherwise empty out variable '''
+      try:
+        if i["State"]["Name"]:
+          state = i["State"]["Name"]
+      except KeyError:
+        state = '' 
+        pass
+
+
+
+      ''' PublicIP: check if it does exists otherwise empty out variable '''
+      try:
         if i["NetworkInterfaces"][0]["Association"]["PublicIp"]:
           publicip = i["NetworkInterfaces"][0]["Association"]["PublicIp"]
       except KeyError:
@@ -85,28 +133,51 @@ def main():
 
 
 
-
+      ''' PrivateIP: check if it does exists otherwise empty out variable '''
       try:
-        ''' Get Private IP and if it does not exist empty out variable '''
         if i["NetworkInterfaces"][0]["PrivateIpAddress"]:
           privateip = i["NetworkInterfaces"][0]["PrivateIpAddress"]
       except KeyError:
         privateip = '' 
         pass
-      
+
+
+
+      ''' LaunchTime: check if it does exists otherwise empty out variable '''
+      try:
+        if i["LaunchTime"]:
+          LaunchTime = i["LaunchTime"]
+      except KeyError:
+        LaunchTime = '' 
+        pass
+
+
+
+      ''' Tags: grab Value where Key == Name '''
+      try:
+        if i['Tags']:
+          for t in range(0, len(i['Tags'])):
+            if i['Tags'][t]['Key'] == 'Name':
+              tag_name = i['Tags'][t]['Value']
+
+      except KeyError:
+        tag_name = ''
+        pass
+
+
 
 
 
       print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<8} {6:<16} {7:<16} {8}   {9}".format(
-        i["NetworkInterfaces"][0]["VpcId"],
-        i["Placement"]["AvailabilityZone"],
-        i["SubnetId"],
-        i["InstanceId"],
-        i["InstanceType"],
-        i["State"]["Name"],
+        VpcId,
+        AZ,
+        SubnetId,
+        InstanceId,
+        InstanceType,
+        state,
         publicip,
         privateip,
-        i["LaunchTime"],
+        LaunchTime,
         tag_name
       )
 
@@ -120,3 +191,4 @@ def main():
 # The code only runs if its not imported and instead run directly.
 if __name__ == "__main__":
   main()
+
