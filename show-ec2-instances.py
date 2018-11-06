@@ -44,7 +44,7 @@ def main():
 
 
   ''' Header '''
-  print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<10} {6:<20} {7:<20} {8}".format(
+  print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<8} {6:<16} {7:<16} {8:<27} {9}".format(
     "VpcId",
     "AZ",
     "SubnetId",
@@ -53,6 +53,7 @@ def main():
     "State",
     "PublicIp",
     "PrivateIp",
+    "LaunchTime",
     "Name"
   )
 
@@ -96,7 +97,7 @@ def main():
 
 
 
-      print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<10} {6:<20} {7:<20} {8}".format(
+      print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<8} {6:<16} {7:<16} {8}   {9}".format(
         i["NetworkInterfaces"][0]["VpcId"],
         i["Placement"]["AvailabilityZone"],
         i["SubnetId"],
@@ -105,6 +106,7 @@ def main():
         i["State"]["Name"],
         publicip,
         privateip,
+        i["LaunchTime"],
         tag_name
       )
 
