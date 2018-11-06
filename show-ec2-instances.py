@@ -33,9 +33,8 @@ def main():
   response = client.describe_instances()
 
 
-  ''' Print full json dump of all ec2 resources 
+  # Print full json dump of all ec2 resources 
   print json.dumps(response, indent=4, sort_keys=True, default=str)
-  '''
 
 
   print
@@ -44,7 +43,7 @@ def main():
 
 
   ''' Header '''
-  print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<8} {6:<16} {7:<16} {8:<27} {9}".format(
+  print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<11} {6:<16} {7:<16} {8:<27} {9}".format(
     "VpcId",
     "AZ",
     "SubnetId",
@@ -65,8 +64,8 @@ def main():
 
       ''' VpcId: check if it does exists otherwise empty out variable '''
       try:
-        if i["NetworkInterfaces"][0]["VpcId"]:
-          VpcId = i["NetworkInterfaces"][0]["VpcId"]
+        if i["VpcId"]:
+          VpcId = i["VpcId"]
       except KeyError:
         VpcId = '' 
         pass
@@ -130,6 +129,9 @@ def main():
       except KeyError:
         publicip = '' 
         pass
+      except IndexError:
+        publicip = ''
+        pass
 
 
 
@@ -139,6 +141,9 @@ def main():
           privateip = i["NetworkInterfaces"][0]["PrivateIpAddress"]
       except KeyError:
         privateip = '' 
+        pass
+      except IndexError:
+        privateip = ''
         pass
 
 
@@ -168,7 +173,7 @@ def main():
 
 
 
-      print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<8} {6:<16} {7:<16} {8}   {9}".format(
+      print "{0:<13} {1:<11} {2:<16} {3:<20} {4:<10} {5:<11} {6:<16} {7:<16} {8}   {9}".format(
         VpcId,
         AZ,
         SubnetId,
