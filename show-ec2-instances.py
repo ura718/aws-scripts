@@ -34,7 +34,7 @@ def main():
 
 
   # Print full json dump of all ec2 resources 
-  print json.dumps(response, indent=4, sort_keys=True, default=str)
+  #print json.dumps(response, indent=4, sort_keys=True, default=str)
 
 
   print
