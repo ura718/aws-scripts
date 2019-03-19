@@ -41,7 +41,7 @@ def main():
 
 
   ''' Header '''
-  print "{0:<11} {1:<20} {2:<22} {3:<11} {4:<9} {5:<5} {6:<23} {7:<7} {8:<10}".format(
+  print "{0:<11} {1:<20} {2:<22} {3:<11} {4:<9} {5:<5} {6:<23} {7:<7} {8:<10} {9}".format(
     "AZ",
     "InstanceId",
     "VolumeId",
@@ -50,7 +50,8 @@ def main():
     "IOPS",
     "SnapshotId",
     "State",
-    "Device"
+    "Device",
+    "Name"
   )
 
 
@@ -154,10 +155,19 @@ def main():
       pass
 
 
+    ''' Tags: grab Value where Key == Name '''
+    try:
+      if v['Tags']:
+        for t in range(0, len(v['Tags'])):
+          if v['Tags'][t]['Key'] == 'Name':
+            tag_name = v['Tags'][t]['Value']
+
+    except KeyError:
+      tag_name = ''
+      pass
 
 
-
-    print "{0:<11} {1:<20} {2:<22} {3:<11} {4:<9} {5:<5} {6:<23} {7:<7} {8:<10}".format(
+    print "{0:<11} {1:<20} {2:<22} {3:<11} {4:<9} {5:<5} {6:<23} {7:<7} {8:<10} {9}".format(
       AZ,
       InstanceId,
       VolumeId,
@@ -166,7 +176,8 @@ def main():
       IOPS,
       SnapshotId,
       State,
-      Device
+      Device,
+      tag_name
     )
 
      
