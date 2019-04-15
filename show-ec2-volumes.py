@@ -76,6 +76,9 @@ def main():
     except KeyError:
       InstanceId = ''
       pass
+    except IndexError:
+      InstanceId = ''
+      pass
 
 
 
@@ -86,6 +89,9 @@ def main():
         VolumeId = v["Attachments"][0]["VolumeId"]
     except KeyError:
       VolumeId = ''
+      pass
+    except IndexError:
+      InstanceId = ''
       pass
 
 
@@ -152,6 +158,9 @@ def main():
         Device = v["Attachments"][0]["Device"]
     except KeyError:
       Device = ''
+      pass
+    except IndexError:
+      InstanceId = ''
       pass
 
 
