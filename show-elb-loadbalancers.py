@@ -55,7 +55,7 @@ def main():
 
 
 
-
+  for r in response["LoadBalancerDescriptions"]:
 
     ''' VpcId: check if it does exists otherwise empty out variable '''
     try:
