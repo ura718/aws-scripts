@@ -147,7 +147,9 @@ def main():
     ''' InstanceId: check if it does exists otherwise empty out variable '''
     try:
       if r["Instances"][0]["InstanceId"]:
+
         InstanceId = []
+
         for i in r["Instances"]:
           ''' Gets the value from hashed index i = [e.g: i.values() ]
               Convert list value to string       = [e.g: ''.join() ]
@@ -155,10 +157,13 @@ def main():
           InstanceId.append(''.join(i.values()))
         # If you want to put newline after every InstanceId. Just formatting preference...
         #InstanceId = '\n'.join(InstanceId)   
+
     except KeyError:
       InstanceId = ''
       pass
-
+    except IndexError:
+      InstanceId = 'No Instances Registered'
+      pass
 
 
 
