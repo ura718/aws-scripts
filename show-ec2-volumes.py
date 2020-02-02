@@ -91,7 +91,7 @@ def main():
       VolumeId = ''
       pass
     except IndexError:
-      InstanceId = ''
+      VolumeId = ''
       pass
 
 
@@ -160,7 +160,7 @@ def main():
       Device = ''
       pass
     except IndexError:
-      InstanceId = ''
+      Device = ''
       pass
 
 
@@ -176,7 +176,7 @@ def main():
       pass
 
 
-    print "{0:<11} {1:<20} {2:<22} {3:<11} {4:<9} {5:<5} {6:<23} {7:<7} {8:<10} {9}".format(
+    print "{0:<11} {1:<20} {2:<22} {3:<11} {4:<9} {5:<5} {6:<23} {7:<10} {8:<10} {9}".format(
       AZ,
       InstanceId,
       VolumeId,
