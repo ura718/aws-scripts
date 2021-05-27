@@ -22,5 +22,3 @@ else
   printf "\n[+] $arn : $version \n"
 fi
 
-
-
