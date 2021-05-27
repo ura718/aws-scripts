@@ -4,6 +4,7 @@
 # Shows detailed policy information
 # Date: May 27, 2021
 
+
 if [ -z "$1" ]
 then
   echo "Usage: "
