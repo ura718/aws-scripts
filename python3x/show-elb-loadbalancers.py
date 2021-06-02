@@ -94,6 +94,10 @@ def main():
     except KeyError:
       Protocol = ''
       pass
+    except IndexError:
+      Protocol = ''
+      pass
+      
 
 
     ''' LoadBalancerPort: check if it does exists otherwise empty out variable '''
@@ -108,6 +112,9 @@ def main():
         LoadBalancerPort.append(Protocol)
 
     except KeyError:
+      LoadBalancerPort = ''
+      pass
+    except IndexError:
       LoadBalancerPort = ''
       pass
 
@@ -134,6 +141,9 @@ def main():
     except KeyError:
       InstanceProtocol = ''
       pass
+    except IndexError:
+      InstanceProtocol = ''
+      pass
 
     ''' InstancePort: check if it does exists otherwise empty out variable '''
     try:
@@ -147,6 +157,9 @@ def main():
         InstancePort.append(InstanceProtocol)
 
     except KeyError:
+      InstancePort = ''
+      pass
+    except IndexError:
       InstancePort = ''
       pass
 
